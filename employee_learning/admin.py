@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Division, Employee, PersonalInfo,LearningCourse
+from .models import Division, Employee, LearningCourse, PersonalInfo
 
 
 
