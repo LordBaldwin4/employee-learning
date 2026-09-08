@@ -1,8 +1,65 @@
-venv/
-d_env/
+# Secrets and local configuration
 .env
+.env.*
+*.env
+local_settings.py
+
+# Python environments and generated files
+venv/
+env/
+.venv/
+d_env/
 __pycache__/
 *.py[cod]
+*.egg-info/
+.Python
+
+# Databases and exports
 *.sqlite3
+*.db
+*.sql
+*.dump
+
+# Django-generated files and uploads
 staticfiles/
+media/
+
+# IDE and operating system files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 .DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Logs, caches, temporary files and test coverage
+*.log
+logs/
+.cache/
+*.tmp
+*.bak
+*.swp
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Node.js tooling
+node_modules/
+.npm/
+.yarn/
+yarn-error.log
+.pnp.*
+
+# Private keys and certificates
+id_rsa
+*.pem
+*.key
+*.crt
+*.cert
+*.pfx
+*.p12
+credentials.json
+service-account.json
