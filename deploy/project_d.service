@@ -1,0 +1,20 @@
+[Unit]
+Description=Gunicorn daemon for Employee Learning Hub
+Requires=project_d.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/employee-learning
+EnvironmentFile=/home/ubuntu/employee-learning/.env
+Environment=DJANGO_SETTINGS_MODULE=config.settings.production
+ExecStart=/home/ubuntu/employee-learning/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/project_d.sock \
+          config.wsgi:application
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

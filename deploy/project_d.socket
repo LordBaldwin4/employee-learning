@@ -1,0 +1,8 @@
+[Unit]
+Description=Gunicorn socket for Employee Learning Hub
+
+[Socket]
+ListenStream=/run/project_d.sock
+
+[Install]
+WantedBy=sockets.target
