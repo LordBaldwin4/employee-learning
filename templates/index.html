@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% block title %}Accueil | Employee Learning Hub{% endblock %}
+{% block body_class %}page-home{% endblock %}
+{% block body %}
+<div class="container text-center my-5 py-5">
+    <h1 class="display-4 fw-bold mb-3">Enregistrement numérique des formations</h1>
+    <p class="lead text-secondary mb-4">Aujourd'hui : <strong>{{ today }}</strong></p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="{% url 'course_list' %}" class="btn btn-primary btn-lg">Voir les formations</a>
+        <a href="{% url 'course_create' %}" class="btn btn-outline-success btn-lg">Créer un cours</a>
+    </div>
+</div>
+{% endblock %}

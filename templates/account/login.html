@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+
+{% block title %}Connexion | Employee Learning Hub{% endblock %}
+{% block body_class %}page-auth page-login{% endblock %}
+
+{% block body %}
+<section class="auth-shell">
+    <div class="auth-panel auth-panel-intro">
+        <p class="auth-kicker">Employee Learning Hub</p>
+        <h1>Bienvenue dans votre espace de formation.</h1>
+        <p class="auth-intro">Retrouvez vos cours, vos inscriptions et votre parcours d'apprentissage au même endroit.</p>
+    </div>
+
+    <div class="auth-panel auth-panel-form">
+        <div class="auth-heading">
+            <span class="auth-mark">EL</span>
+            <div>
+                <p class="auth-kicker mb-1">Accès membre</p>
+                <h2>Se connecter</h2>
+            </div>
+        </div>
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <form method="post" action="{% url 'account_login' %}" class="auth-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-lg w-100">Ouvrir ma session</button>
+        </form>
+
+        <div class="auth-links">
+            <a href="{% url 'account_reset_password' %}">Mot de passe oublié ?</a>
+            <span>Pas encore de compte ?</span>
+            <a href="{% url 'account_signup' %}" class="fw-semibold">Créer un compte</a>
+        </div>
+
+        {% get_providers as socialaccount_providers %}
+        {% if socialaccount_providers %}
+            <div class="auth-divider"><span>ou continuer avec</span></div>
+            <div class="social-actions">
+                {% for provider in socialaccount_providers %}
+                    <a class="btn btn-outline-secondary" href="{% provider_login_url provider.id process='login' %}">{{ provider.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

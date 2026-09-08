@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+{% block title %}Supprimer le cours | Employee Learning Hub{% endblock %}
+{% block body_class %}page-course-delete{% endblock %}
+{% block body %}
+<div class="container my-5" style="max-width: 560px;">
+    <div class="card shadow-sm border-danger"><div class="card-body p-4 text-center">
+        <h1 class="h2 text-danger">Confirmer la suppression</h1>
+        <p>Voulez-vous supprimer définitivement « {{ object }} » ?</p>
+        <form method="post">{% csrf_token %}<a href="{% url 'course_detail' object.pk %}" class="btn btn-secondary">Annuler</a> <button type="submit" class="btn btn-danger">Supprimer</button></form>
+    </div></div>
+</div>
+{% endblock %}

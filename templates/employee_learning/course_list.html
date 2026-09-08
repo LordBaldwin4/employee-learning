@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% block title %}Cours | Employee Learning Hub{% endblock %}
+{% block body_class %}page-course-list{% endblock %}
+{% block body %}
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div><h1 class="mb-1">Liste des formations</h1><p class="text-secondary mb-0">Mise à jour : {{ today }}</p></div>
+        <a href="{% url 'course_create' %}" class="btn btn-primary">Nouveau cours</a>
+    </div>
+    <div class="row g-4">
+        {% for course in course_object_list %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="h5 text-primary">{{ course.title|upper }}</h2>
+                        <p class="text-muted">Niveau : {{ course.get_level_display }}</p>
+                        <p class="small text-secondary">{{ course.employee.count }} employé{{ course.employee.count|pluralize }} inscrit{{ course.employee.count|pluralize }}</p>
+                        <a href="{% url 'course_detail' course.pk %}" class="btn btn-outline-primary mt-auto">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12"><p class="alert alert-info">Aucun cours disponible.</p></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

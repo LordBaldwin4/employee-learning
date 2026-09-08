@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ course_object.title }} | Employee Learning Hub{% endblock %}
+{% block body_class %}page-course-detail{% endblock %}
+{% block body %}
+<div class="container my-5" style="max-width: 720px;">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+            <h1 class="text-primary">{{ course_object.title }}</h1>
+            <p class="lead">Niveau : <strong>{{ course_object.get_level_display }}</strong></p>
+            <h2 class="h5 mt-4">Employés inscrits</h2>
+            <ul class="list-group mb-4">
+                {% for employee in course_object.employee.all %}
+                    <li class="list-group-item d-flex justify-content-between"><span>{{ employee.name }}</span><span class="text-muted">{{ employee.division.div_name }}</span></li>
+                {% empty %}
+                    <li class="list-group-item text-muted">Aucun employé inscrit.</li>
+                {% endfor %}
+            </ul>
+            <div class="d-flex gap-2">
+                <a href="{% url 'course_update' course_object.pk %}" class="btn btn-warning">Modifier</a>
+                <a href="{% url 'course_delete' course_object.pk %}" class="btn btn-danger">Supprimer</a>
+                <a href="{% url 'course_list' %}" class="btn btn-outline-secondary ms-auto">Retour</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
